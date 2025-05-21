@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
+
 
 const app = express();
 app.use(cors());
@@ -18,10 +19,10 @@ app.post("/scrape", async (req, res) => {
   try {
     console.log("Launching browser...");
     const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/google-chrome",
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+  headless: true,
+  args: ["--no-sandbox", "--disable-setuid-sandbox"]
+});
+    console.log("Browser launched");
 
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
