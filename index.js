@@ -16,13 +16,7 @@ app.post("/scrape", async (req, res) => {
 
   if (!url) return res.status(400).json({ error: "URL is required" });
 
-  try {
-    console.log("Launching browser...");
-    const browser = await puppeteer.launch({
-  headless: true,
-  args: ["--no-sandbox", "--disable-setuid-sandbox"]
-});
-    console.log("Browser launched");
+
 
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
